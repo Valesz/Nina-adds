@@ -1,0 +1,21 @@
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteLogLevel 3
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^([^\.\/]+) Controllers/$1Controller.php [NC,L]
+
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,NE,L]
+
+    RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+    RewriteRule ^ /%1 [R=301,NE,L]
+</IfModule>
+
+<ifModule mod_alias.c>
+    Redirect "/index.php" "/home"
+    ErrorDocument 404 "/error/404"
+</ifModule>
+  
