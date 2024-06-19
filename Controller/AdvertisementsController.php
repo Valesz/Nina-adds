@@ -4,10 +4,12 @@
 
     use Application\Model\DAO\AdvertisementDAO;
     use Application\Model\DAO\Interface\IAdvertisementDAO;
+    use Application\Model\DTO\AdvertisementModel;
 
     require_once "Controller.php";
     require_once "../Model/DAO/AdvertisementDAO.php";
     require_once "../Model/DAO/Interface/IAdvertisementDAO.php";
+    require_once "../Model/DTO/UserModel.php";
 
     class AdvertisementsController extends Controller {
 
@@ -29,6 +31,9 @@
         }
 
         public function loadAdvertisementsPage() {
+            $tmp = new AdvertisementModel();
+            $tmp->setId(0)->setUserId(1)->setTitle("asd");
+            $this->addDAO->save($tmp);
             
             $data["adds"] = $this->addDAO->getAll();
             $data["singleAdd"] = $this->addDAO->getRow(2);

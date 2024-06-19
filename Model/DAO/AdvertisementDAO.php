@@ -64,4 +64,33 @@ class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
 
         return $tmpObj;
     }
+
+    public function save($object): bool {
+        if (!is_a($object, AdvertisementModel::class)) {
+            throw new InvalidArgumentException("Given object is of the wrong type!");
+        }
+
+        $id = $object->getId();
+
+        $conn = $this->getConnection();
+        $query = "SELECT * FROM $this->table WHERE id = $id";
+        $result = $conn->query($query);
+
+        $userId = $object->getUserId();
+        $title = htmlspecialchars($object->getTitle());
+
+        if ($result->num_rows <= 0) {
+            $query = "INSERT INTO $this->table (userId , title) VALUES ($userId, '$title')";
+            if ($conn->query($query)) {
+                return true;
+            }
+            return false;
+        } else {
+            $query = "UPDATE $this->table SET userId = $userId, title = '$title' WHERE id = $id";
+            if ($conn->query($query)) {
+                return true;
+            }  
+            return false;
+        }
+    }
 }
