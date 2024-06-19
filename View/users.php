@@ -4,3 +4,5 @@
     <p><?= $user->getId() ?> <?= $user->getName() ?></p>
 
 <?php endforeach; ?>
+
+<?= $singleUser->getName() ?>

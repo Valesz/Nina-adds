@@ -2,7 +2,10 @@
 
     namespace Application\Controller;
 
-    include "Controller.php";
+    use Application\Model\DAO\AdvertisementDAO;
+
+    require_once "Controller.php";
+    require_once "../Model/DAO/AdvertisementDAO.php";
 
     class AdvertisementsController extends Controller {
 
@@ -17,7 +20,10 @@
         }
 
         public function loadAdvertisementsPage() {
-            $this->render('advertisements');
+            $addDAO = new AdvertisementDAO();
+            $data["adds"] = $addDAO->getAll();
+            $data["singleAdd"] = $addDAO->getRow(2);
+            $this->render('advertisements', $data);
         }
     }
 

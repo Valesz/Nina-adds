@@ -4,9 +4,9 @@
 
     use Application\Model\DAO\UserDAO;
 
-    include_once "../Model/DAO/UserDAO.php";
+    require_once "../Model/DAO/UserDAO.php";
 
-    include_once "Controller.php";
+    require_once "Controller.php";
 
     class UsersController extends Controller {
 
@@ -22,8 +22,9 @@
 
         public function loadUsersPage() {
             $userDAO = new UserDAO();
-            $users = ["users" => $userDAO->getAll()];
-            $this->render('users', $users);
+            $data["users"] = $userDAO->getAll();
+            $data["singleUser"] = $userDAO->getRow(2);
+            $this->render('users', $data);
         }
     }
 

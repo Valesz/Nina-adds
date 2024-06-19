@@ -6,14 +6,16 @@ use mysqli;
 
 include_once "Interface/IBaseDAO.php";
 
-class BaseDAO implements IBaseDAO {
-    private $address;
-    private $username;
-    private $password;
-    private $database;
+abstract class BaseDAO implements IBaseDAO {
+    private string $address;
+    private string $username;
+    private string $password;
+    private string $database;
+
+    private string $configPath = "../../application.properties.json";
 
     public function __construct() {
-        $config = file_get_contents("../../application.properties.json");
+        $config = file_get_contents($this->configPath);
         
         $dbCredentials = json_decode($config, true)["DB_CREDENTIALS"];
 
@@ -35,5 +37,11 @@ class BaseDAO implements IBaseDAO {
 
         return $connection;
     }
+
+    abstract public function getAll();
+
+    abstract public function getRow($key);
+
+    //abstract public function save();
 }
 
