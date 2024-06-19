@@ -13,7 +13,7 @@
         public static function render(string $view, array $data = []) {
             extract($data);
     
-            include "../Views/$view.php";
+            include "../View/$view.php";
         }
 
         protected function loadPageForUrl() {
