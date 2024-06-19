@@ -1,6 +1,6 @@
 <h1>Users work!</h1>
 <?php foreach ($users as $user) : ?>
 
-    <p><?= $user ?></p>
+    <p><?= $user->getId() ?> <?= $user->getName() ?></p>
 
 <?php endforeach; ?>

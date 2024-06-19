@@ -1,0 +1,9 @@
+{
+    "DB_CREDENTIALS": {
+        "ADDRESS": "localhost",
+        "USERNAME": "root",
+        "PASSWORD": "",
+        "DATABASE": "hirvivo"
+    }
+}
+

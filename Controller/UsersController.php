@@ -2,7 +2,11 @@
 
     namespace Application\Controller;
 
-    include "Controller.php";
+    use Application\Model\DAO\UserDAO;
+
+    include_once "../Model/DAO/UserDAO.php";
+
+    include_once "Controller.php";
 
     class UsersController extends Controller {
 
@@ -17,9 +21,9 @@
         }
 
         public function loadUsersPage() {
-            //$userDAO = new UserDAO();
-            //$users = $userDAO->getAll();
-            $this->render('users');
+            $userDAO = new UserDAO();
+            $users = ["users" => $userDAO->getAll()];
+            $this->render('users', $users);
         }
     }
 
