@@ -1,0 +1,21 @@
+@import "theme.css";
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10%;
+    justify-content: center;
+    align-items: center;
+}
+
+section {
+    width: 20%;
+    padding: 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px var(--action);
+}
+
+p {
+    margin: 30px 10px;
+}

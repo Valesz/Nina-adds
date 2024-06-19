@@ -1,0 +1,54 @@
+@import "theme.css";
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+form, div {
+    border-radius: 10px;
+    box-shadow: 0 0 5px 1px var(--action);
+    padding: 20px;
+}
+
+p {
+    color: var(--action);
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+.name {
+    color: var(--accent);
+    font-size: 1.4rem;
+}
+
+.add {
+    width: 20%;
+    max-width: 250px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 12px auto 30px;
+}
+
+input[type] {
+    margin: 20px 10px;
+    display: block;
+}
+
+input[type="submit"], input[type="reset"], button {
+    margin: 20px auto 0;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+    transform: scale(110%);
+}

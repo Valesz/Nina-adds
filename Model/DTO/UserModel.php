@@ -27,7 +27,7 @@ class UserModel {
     }
 
     public function setName(string $value): UserModel {
-        $this->name = $value;
+        $this->name = htmlspecialchars($value);
         return $this;
     }
 }

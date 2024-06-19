@@ -26,18 +26,34 @@
             return [
                 "GET" => [
                     ("/" . $this->path) => "loadUsersPage"
+                ],
+                "POST" => [
+                    ("/" . $this->path . "/add") => "saveUser"
                 ]
             ];
         }
 
         public function loadUsersPage() {
-            $tmp = new UserModel();
-            $tmp->setId(0)->setName("valesz");
-            $this->userDAO->save($tmp);
+            if (isset($_GET['failed'])) {
+                $data['failed'] = true;
+            }
 
             $data["users"] = $this->userDAO->getAll();
-            $data["singleUser"] = $this->userDAO->getRow(1);
             $this->render('users', $data);
+        }
+
+        public function saveUser() {
+            if (empty($_POST['name'])) {
+                header("Location: /users?failed=true");
+                return;
+            }
+
+            $tmp = new UserModel();
+            $tmp->setId(!empty($_POST['id']) ? intval($_POST['id']) : 0)
+                ->setName($_POST['name']);
+            $this->userDAO->save($tmp);
+            
+            header("Location: /users");
         }
     }
 
