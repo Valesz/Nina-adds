@@ -4,10 +4,12 @@
 
     use Application\Model\DAO\Interface\IUserDAO;
     use Application\Model\DAO\UserDAO;
+    use Application\Model\DTO\UserModel;
 
     require_once "Controller.php";
     require_once "../Model/DAO/UserDAO.php";
     require_once "../Model/DAO/Interface/IUserDAO.php";
+    require_once "../Model/DTO/UserModel.php";
 
     class UsersController extends Controller {
 
@@ -29,8 +31,12 @@
         }
 
         public function loadUsersPage() {
+            $tmp = new UserModel();
+            $tmp->setId(0)->setName("valesz");
+            $this->userDAO->save($tmp);
+
             $data["users"] = $this->userDAO->getAll();
-            $data["singleUser"] = $this->userDAO->getRow(2);
+            $data["singleUser"] = $this->userDAO->getRow(1);
             $this->render('users', $data);
         }
     }

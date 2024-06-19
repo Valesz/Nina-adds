@@ -10,4 +10,6 @@ interface IUserDAO extends IBaseDAO {
 
     public function getRow($key) : UserModel;
 
+    public function save($object): bool;
+
 }

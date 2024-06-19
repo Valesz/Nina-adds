@@ -60,6 +60,8 @@ class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
                     setUserId($row['userId'])->
                     setTitle($row['title']);
 
+        $conn->close();
+
         return $tmpObj;
     }
 }

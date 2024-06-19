@@ -58,6 +58,36 @@ class UserDAO extends BaseDAO implements IUserDAO {
         $tmpObj->setId($row['id'])->
                     setName($row['name']);
 
+        $conn->close();
+
         return $tmpObj;
+    }
+
+    public function save($object): bool {
+        if (!is_a($object, UserModel::class)) {
+            throw new InvalidArgumentException("Given object is of the wrong type!");
+        }
+
+        $id = $object->getId();
+
+        $conn = $this->getConnection();
+        $query = "SELECT * FROM $this->table WHERE id = $id";
+        $result = $conn->query($query);
+
+        $name = htmlspecialchars($object->getName());
+
+        if ($result->num_rows <= 0) {
+            $query = "INSERT INTO $this->table (name) VALUES ('$name')";
+            if ($conn->query($query)) {
+                return true;
+            }
+            return false;
+        } else {
+            $query = "UPDATE $this->table SET name = '$name' WHERE id = $id";
+            if ($conn->query($query)) {
+                return true;
+            }  
+            return false;
+        }
     }
 }

@@ -10,5 +10,7 @@ interface IBaseDAO {
 
     public function getAll(): array;
 
-    public function getRow($key);
+    public function getRow($key): object;
+
+    public function save(Object $object): bool;
 }

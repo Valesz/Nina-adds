@@ -41,8 +41,8 @@ abstract class BaseDAO implements IBaseDAO {
 
     abstract public function getAll(): array;
 
-    abstract public function getRow($key);
+    abstract public function getRow($key): object;
 
-    //abstract public function save();
+    abstract public function save(object $object): bool;
 }
 
