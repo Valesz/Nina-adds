@@ -5,13 +5,15 @@ namespace Application\Model\DAO;
 use Application\Model\DAO\BaseDAO;
 use Application\Model\DTO\AdvertisementModel;
 use InvalidArgumentException;
+use Application\Model\DAO\Interface\IAdvertisementDAO;
 
-require("BaseDAO.php");
-require($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/AdvertisementModel.php");
+require_once("BaseDAO.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/AdvertisementModel.php");
+require_once("Interface/IAdvertisementDAO.php");
 
-class AdvertisementDAO extends BaseDAO {
+class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
 
-    private $table = "advertisement";
+    private string $table = "advertisement";
 
     public function getAll() : array {
         $conn = $this->getConnection();

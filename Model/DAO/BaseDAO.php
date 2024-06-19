@@ -3,6 +3,7 @@
 namespace Application\Model\DAO;
 
 use mysqli;
+use Application\Model\DAO\Interface\IBaseDAO;
 
 include_once "Interface/IBaseDAO.php";
 
@@ -38,7 +39,7 @@ abstract class BaseDAO implements IBaseDAO {
         return $connection;
     }
 
-    abstract public function getAll();
+    abstract public function getAll(): array;
 
     abstract public function getRow($key);
 

@@ -3,17 +3,19 @@
 namespace Application\Model\DAO;
 
 use Application\Model\DAO\BaseDAO;
+use Application\Model\DAO\Interface\IUserDAO;
 use Application\Model\DTO\UserModel;
 use InvalidArgumentException;
 
-require("BaseDAO.php");
-require($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/UserModel.php");
+require_once("BaseDAO.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/UserModel.php");
+require_once("Interface/IUserDAO.php");
 
-class UserDAO extends BaseDAO {
+class UserDAO extends BaseDAO implements IUserDAO {
 
     private $table = "user";
 
-    public function getAll() {
+    public function getAll(): array {
         $conn = $this->getConnection();
         $query = "SELECT * FROM `$this->table` WHERE 1";
         $result = $conn->query($query);
