@@ -21,6 +21,8 @@ nav h2 {
     text-align: left;
     padding-left: 25px;
     text-transform: uppercase;
+    text-wrap: nowrap;
+    width: fit-content;
     font-size: 1.8rem;
     transition: 0.3s all;
 }

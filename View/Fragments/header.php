@@ -1,5 +1,5 @@
 <nav>
-    <a href="/home"><h2>OldalCím</h2></a>
+    <a href="/home"><h2>Nina adds</h2></a>
     <ul>
         <li><a href="/advertisements">Advertisements</a></li>
         <li><a href="/users">Users</a></li>
