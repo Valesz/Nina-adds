@@ -26,7 +26,7 @@ class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
     /**
      * The table name for the DAO to mainly communicate with.
      */
-    private string $table = "advertisement";
+    private string $table = "advertisements";
 
     /**
      * Return an array of AdvertisementModels from the database.
@@ -63,8 +63,8 @@ class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
      */
     public function getAllWithNames(): array {
         $conn = $this->getConnection();
-        $query = "SELECT advertisement.id as 'id', userId, title, name FROM `advertisement` 
-            INNER JOIN `user` on user.id = advertisement.userId
+        $query = "SELECT advertisements.id as 'id', userId, title, name FROM `advertisements` 
+            INNER JOIN `users` on users.id = advertisements.userId
             WHERE 1";
         $result = $conn->query($query);
 

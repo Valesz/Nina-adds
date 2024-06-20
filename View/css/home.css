@@ -19,3 +19,14 @@ section {
 p {
     margin: 30px 10px;
 }
+
+@media only screen and (max-width: 600px) {
+    main {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    section {
+        width: 80%;
+    }
+}

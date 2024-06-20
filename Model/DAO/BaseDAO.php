@@ -41,7 +41,7 @@ abstract class BaseDAO implements IBaseDAO {
     /**
      * The relative path to the config file with the credentials to connect to the databse.
      */
-    private string $configPath = "../../application.properties.json";
+    private string $configPath = "../application.properties.json";
 
     /**
      * Inicializes the properties for the connection from the application.properties.json.

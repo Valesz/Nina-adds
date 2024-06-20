@@ -60,3 +60,9 @@ input[type="submit"], input[type="reset"], button {
 input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
     transform: scale(110%);
 }
+
+@media only screen and (max-width: 600px) {
+    div {
+        width: 80%;
+    }
+}

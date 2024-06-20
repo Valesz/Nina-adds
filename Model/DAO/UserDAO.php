@@ -24,7 +24,7 @@ class UserDAO extends BaseDAO implements IUserDAO {
     /**
      * The table name for the DAO to mainly communicate with.
      */
-    private $table = "user";
+    private $table = "users";
 
     /**
      * Return an array of UserModels from the database.
