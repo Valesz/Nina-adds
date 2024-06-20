@@ -13,4 +13,6 @@ interface IAdvertisementDAO extends IBaseDAO {
     public function getRow($key) : AdvertisementModel;
 
     public function save($object): bool;
+
+    public function remove($key): bool;
 }

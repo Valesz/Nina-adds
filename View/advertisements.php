@@ -32,6 +32,10 @@
                     <p>id: <?= $add["add"]->getId() ?></p>
                     <p class="name">title: <?= $add["add"]->getTitle() ?></p>
                     <p>user: <?= $add["user"]->getName() ?> (<?= $add["user"]->getId() ?>)</p>
+                    <form action="advertisements/remove" method="POST">
+                        <input type="hidden" name="id" value="<?= $add['add']->getId() ?>">
+                        <input type="submit" value="Delete">
+                    </form>
                 </div>
             
             <?php endforeach; ?>

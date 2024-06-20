@@ -29,7 +29,8 @@
                     ("/" . $this->path) => "loadAdvertisementsPage"
                 ],
                 "POST" => [
-                    ("/" . $this->path . "/add") => "saveAdvertisement"
+                    ("/" . $this->path . "/add") => "saveAdvertisement",
+                    ("/" . $this->path . "/remove") => "removeAdvertisement"
                 ]
             ];
         }
@@ -62,6 +63,28 @@
                 return;
             }
             
+            header("Location: /$this->path");
+        }
+
+        public function removeAdvertisement() {
+            if (empty($_POST['id'])) {
+                
+                header("Location: /$this->path");
+                return;
+            }
+
+            try {
+
+                $this->addDAO->remove($_POST['id']);
+
+            } catch (Exception $e) {
+
+                header("Location: /$this->path");
+                return;
+                
+            }
+
+            echo "success";
             header("Location: /$this->path");
         }
     }
