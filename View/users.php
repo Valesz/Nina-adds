@@ -30,6 +30,10 @@
                 <div>
                     <p><?= $user->getId() ?></p>
                     <p class="name"><?= $user->getName() ?></p>
+                    <form action="/users/remove" method="POST">
+                        <input type="hidden" name="id" value="<?= $user->getId() ?>">
+                        <input type="submit" value="Delete">
+                    </form>
                 </div>
             
             <?php endforeach; ?>

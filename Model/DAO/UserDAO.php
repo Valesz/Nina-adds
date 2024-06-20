@@ -90,4 +90,18 @@ class UserDAO extends BaseDAO implements IUserDAO {
             return false;
         }
     }
+
+    public function remove($key): bool {
+        if (is_int($key)) {
+            throw new InvalidArgumentException("Given key with wrong type of key");
+        }
+
+        $conn = $this->getConnection();
+        $query = "DELETE FROM $this->table WHERE id = $key";
+        if ($conn->query($query)) {
+            return true;
+        }
+
+        return false;
+    }
 }

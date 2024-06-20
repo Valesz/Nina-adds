@@ -29,7 +29,8 @@
                     ("/" . $this->path) => "loadUsersPage"
                 ],
                 "POST" => [
-                    ("/" . $this->path . "/add") => "saveUser"
+                    ("/" . $this->path . "/add") => "saveUser",
+                    ("/" . $this->path . "/remove") => "removeUser"
                 ]
             ];
         }
@@ -45,7 +46,7 @@
 
         public function saveUser() {
             if (empty($_POST['name'])) {
-                header("Location: /users?failed=true");
+                header("Location: /$this->path?failed=true");
                 return;
             }
 
@@ -57,11 +58,33 @@
                 $this->userDAO->save($tmp);
 
             } catch (Exception $e) {
-                header("Location: /users?failed=true");
+                header("Location: /$this->path?failed=true");
                 return;
             }
             
-            header("Location: /users");
+            header("Location: /$this->path");
+        }
+
+        public function removeUser() {
+            if (empty($_POST['id'])) {
+                
+                header("Location: /$this->path");
+                return;
+            }
+
+            try {
+
+                $this->userDAO->remove($_POST['id']);
+
+            } catch (Exception $e) {
+
+                header("Location: /$this->path");
+                return;
+                
+            }
+
+            echo "success";
+            header("Location: /$this->path");
         }
     }
 
