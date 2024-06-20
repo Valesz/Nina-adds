@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="./View/css/navbar.css">
     <link rel="stylesheet" href="./View/css/global.css">
-    <link rel="stylesheet" href="./View/css/users.css">
+    <link rel="stylesheet" href="./View/css/listing.css">
 </head>
 <body>
     <?php include "Fragments/header.php" ?>
@@ -27,9 +27,9 @@
 
 
             <?php foreach ($users as $user) : ?>
-                <div id="display<?= $user->getId() ?>">
+                <div>
                     <p><?= $user->getId() ?></p>
-                    <p id="display<?= $user->getId() ?>" class="name"><?= $user->getName() ?></p>
+                    <p class="name"><?= $user->getName() ?></p>
                 </div>
             
             <?php endforeach; ?>
