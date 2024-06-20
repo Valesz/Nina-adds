@@ -12,10 +12,26 @@
     require_once "../Model/DAO/Interface/IUserDAO.php";
     require_once "../Model/DTO/UserModel.php";
 
+    /**
+     * This is the controller for the users page.
+     * 
+     * @extends Controller
+     * 
+     * @method array routes() - return the available routes for this controller with their corresponding methods.
+     * @method void loadUsersPage() - Renders the users page.
+     * @method void saveAdvertisements() - Attempts to save the user then redirects back to default page of this controller.
+     * @method void removeAdvertisement() - Attempts to remove a user from the database.
+     */
     class UsersController extends Controller {
 
+        /**
+         * The default path for this controller.
+         */
         private $path = "users";
 
+        /**
+         * Interface DAO used.
+         */
         private IUserDAO $userDAO;
 
         public function __construct() {
@@ -23,6 +39,10 @@
             parent::__construct();
         }
 
+        /**
+         * Available routes with their corresponding methods for this controller.
+         * @return array - The available routes with their corresponding methods.
+         */
         protected function routes(): array {
             return [
                 "GET" => [
@@ -35,6 +55,9 @@
             ];
         }
 
+        /**
+         * Renders the users page.
+         */
         public function loadUsersPage() {
             if (isset($_GET['failed'])) {
                 $data['failed'] = true;
@@ -44,6 +67,9 @@
             $this->render('users', $data);
         }
 
+        /**
+         * Attempts to save the user then redirects back to default page of this controller. 
+         */
         public function saveUser() {
             if (empty($_POST['name'])) {
                 header("Location: /$this->path?failed=true");
@@ -65,6 +91,10 @@
             header("Location: /$this->path");
         }
 
+        /**
+         *  Attempts to remove a user from the database. 
+         *  It requires a POST request with 'id' to work.
+         */
         public function removeUser() {
             if (empty($_POST['id'])) {
                 

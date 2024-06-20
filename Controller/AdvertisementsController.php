@@ -12,10 +12,26 @@
     require_once "../Model/DAO/Interface/IAdvertisementDAO.php";
     require_once "../Model/DTO/UserModel.php";
 
+    /**
+     * This class handles the routes for the advertisements page
+     * 
+     * @extends Controller
+     * 
+     * @method array routes() - return the available routes for this controller with their corresponding methods.
+     * @method void loadAdvertisementsPage() - renders the default page for this controller.
+     * @method void saveAdvertisements() - attempts to save the add then redirects back to default page of this controller.
+     * @method void removeAdvertisement() - attempts to remove an add from the database.
+     */
     class AdvertisementsController extends Controller {
 
-        private $path = "advertisements";
+        /**
+         * The default path for this controller.
+         */
+        private string $path = "advertisements";
 
+        /**
+         * Interface DAO used.
+         */
         private IAdvertisementDAO $addDAO;
 
         public function __construct() {
@@ -23,6 +39,10 @@
             parent::__construct();
         }
 
+        /**
+         * Available routes with their corresponding methods for this controller.
+         * @return array - The available routes with their corresponding methods.
+         */
         protected function routes(): array {
             return [
                 "GET" => [
@@ -35,6 +55,9 @@
             ];
         }
 
+        /**
+         * Renders the advertisements page.
+         */
         public function loadAdvertisementsPage() {
             if (isset($_GET['failed'])) {
                 $data['failed'] = true;
@@ -44,6 +67,10 @@
             $this->render('advertisements', $data);
         }
 
+        /**
+         * Attempts to save the add then redirects back to default page of this controller.
+         * It requires a POST request with 'id' to work.
+         */
         public function saveAdvertisement() {
             if (empty($_POST['userId']) || empty($_POST['title'])) {
                 header("Location: /$this->path?failed=true");
@@ -66,6 +93,10 @@
             header("Location: /$this->path");
         }
 
+        /**
+         *  Attempts to remove an add from the database.
+         *  It requires a POST request with 'id' to work.
+         */
         public function removeAdvertisement() {
             if (empty($_POST['id'])) {
                 
@@ -81,7 +112,7 @@
 
                 header("Location: /$this->path");
                 return;
-                
+
             }
 
             echo "success";
