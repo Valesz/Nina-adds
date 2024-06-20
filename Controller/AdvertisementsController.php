@@ -5,6 +5,7 @@
     use Application\Model\DAO\AdvertisementDAO;
     use Application\Model\DAO\Interface\IAdvertisementDAO;
     use Application\Model\DTO\AdvertisementModel;
+    use Exception;
 
     require_once "Controller.php";
     require_once "../Model/DAO/AdvertisementDAO.php";
@@ -26,14 +27,42 @@
             return [
                 "GET" => [
                     ("/" . $this->path) => "loadAdvertisementsPage"
+                ],
+                "POST" => [
+                    ("/" . $this->path . "/add") => "saveAdvertisement"
                 ]
             ];
         }
 
         public function loadAdvertisementsPage() {
-            $data["adds"] = $this->addDAO->getAll();
-            $data["singleAdd"] = $this->addDAO->getRow(2);
+            if (isset($_GET['failed'])) {
+                $data['failed'] = true;
+            }
+
+            $data["adds"] = $this->addDAO->getAllWithNames();
             $this->render('advertisements', $data);
+        }
+
+        public function saveAdvertisement() {
+            if (empty($_POST['userId']) || empty($_POST['title'])) {
+                header("Location: /$this->path?failed=true");
+                return;
+            }
+
+            $tmp = new AdvertisementModel();
+            try {
+
+                $tmp->setId(!empty($_POST['id']) ? intval($_POST['id']) : 0)
+                    ->setUserId(intval($_POST['userId']))
+                    ->setTitle($_POST['title']);
+                $this->addDAO->save($tmp);
+
+            } catch (Exception $e) {
+                header("Location: /$this->path?failed=true");
+                return;
+            }
+            
+            header("Location: /$this->path");
         }
     }
 

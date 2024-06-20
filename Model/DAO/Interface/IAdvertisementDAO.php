@@ -8,6 +8,8 @@ interface IAdvertisementDAO extends IBaseDAO {
 
     public function getAll() : array;
 
+    public function getAllWithNames();
+
     public function getRow($key) : AdvertisementModel;
 
     public function save($object): bool;

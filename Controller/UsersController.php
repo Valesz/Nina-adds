@@ -5,6 +5,7 @@
     use Application\Model\DAO\Interface\IUserDAO;
     use Application\Model\DAO\UserDAO;
     use Application\Model\DTO\UserModel;
+    use Exception;
 
     require_once "Controller.php";
     require_once "../Model/DAO/UserDAO.php";
@@ -49,9 +50,16 @@
             }
 
             $tmp = new UserModel();
-            $tmp->setId(!empty($_POST['id']) ? intval($_POST['id']) : 0)
-                ->setName($_POST['name']);
-            $this->userDAO->save($tmp);
+            try {
+
+                $tmp->setId(!empty($_POST['id']) ? intval($_POST['id']) : 0)
+                    ->setName($_POST['name']);
+                $this->userDAO->save($tmp);
+
+            } catch (Exception $e) {
+                header("Location: /users?failed=true");
+                return;
+            }
             
             header("Location: /users");
         }

@@ -17,11 +17,11 @@
         <section class="add">
             <form action="/advertisements/add" method="POST">
                 <input type="number" name="id" placeholder="ID">
-                <input type="text" name="userId" placeholder="UserId">
+                <input type="number" name="userId" placeholder="UserId">
                 <input type="text" name="title" placeholder="Title">
                 <input type="submit" value="Save">
                 <?php if (isset($failed)) : ?>
-                    <p style="color:red;">Name not given</p>
+                    <p style="color:red;">Failed to save</p>
                 <?php endif; ?>
             </form>
         </section>
@@ -29,9 +29,9 @@
 
             <?php foreach ($adds as $add) : ?>
                 <div>
-                    <p><?= $add->getId() ?></p>
-                    <p class="name"><?= $add->getUserId() ?></p>
-                    <p><?= $add->getTitle() ?></p>
+                    <p>id: <?= $add["add"]->getId() ?></p>
+                    <p class="name">title: <?= $add["add"]->getTitle() ?></p>
+                    <p>user: <?= $add["user"]->getName() ?> (<?= $add["user"]->getId() ?>)</p>
                 </div>
             
             <?php endforeach; ?>

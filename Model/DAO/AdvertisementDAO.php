@@ -4,11 +4,13 @@ namespace Application\Model\DAO;
 
 use Application\Model\DAO\BaseDAO;
 use Application\Model\DTO\AdvertisementModel;
+use Application\Model\DTO\UserModel;
 use InvalidArgumentException;
 use Application\Model\DAO\Interface\IAdvertisementDAO;
 
 require_once("BaseDAO.php");
 require_once($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/AdvertisementModel.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/Model/DTO/UserModel.php");
 require_once("Interface/IAdvertisementDAO.php");
 
 class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
@@ -24,20 +26,49 @@ class AdvertisementDAO extends BaseDAO implements IAdvertisementDAO {
             return [];
         }
 
-        $users = [];
+        $adds = [];
 
         while ($row = $result->fetch_assoc()) {
-            $tmpUser = new AdvertisementModel();
-            $tmpUser->setId($row['id'])->
-                    setUserId($row['userId'])->
-                    setTitle($row['title']);
+            $tmpAdd = new AdvertisementModel();
+            $tmpAdd->setId($row['id'])
+                    ->setUserId($row['userId'])
+                    ->setTitle($row['title']);
             
-            $users[] = $tmpUser;
+            $adds[] = $tmpAdd;
         }
         
         $conn->close();
 
-        return $users;
+        return $adds;
+    }
+
+    public function getAllWithNames() {
+        $conn = $this->getConnection();
+        $query = "SELECT advertisement.id as 'id', userId, title, name FROM `advertisement` 
+            INNER JOIN `user` on user.id = advertisement.userId
+            WHERE 1";
+        $result = $conn->query($query);
+
+        if ($result->num_rows <= 0) {
+            return [];
+        }
+
+        while ($row = $result->fetch_assoc()) {
+            $tmpAdd = new AdvertisementModel();
+            $tmpAdd->setId($row['id'])
+                    ->setUserId($row['userId'])
+                    ->setTitle($row['title']);
+            
+            $tmpUser = new UserModel();
+            $tmpUser->setId($row['userId'])
+                    ->setName($row['name']);
+
+            $adds[] = ["add" => $tmpAdd, "user" => $tmpUser];
+        }
+
+        $conn->close();
+
+        return $adds;
     }
 
     public function getRow($key) : AdvertisementModel {

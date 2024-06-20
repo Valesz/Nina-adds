@@ -19,7 +19,7 @@
                 <input type="text" name="name" placeholder="Name">
                 <input type="submit" value="Save">
                 <?php if (isset($failed)) : ?>
-                    <p style="color:red;">Name not given</p>
+                    <p style="color:red;">Failed to save</p>
                 <?php endif; ?>
             </form>
         </section>
